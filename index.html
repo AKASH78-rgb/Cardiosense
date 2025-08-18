@@ -43,6 +43,33 @@
     <input type="file" id="fileInput" accept="image/*">
     <label for="fileInput">Upload Image</label>
   </div>
+
+<!-- Chatbot Container -->
+<div class="chatbot-container">
+  <div class="chatbot-header" id="chatbotHeader">
+    <span class="chatbot-title">
+      <svg class="chatbot-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff4d6d"/>
+      </svg>
+      CARDIO <span class="heart">💗</span>
+    </span>
+    <span id="chatbotToggle">×</span>
+  </div>
+  <div class="chatbot-body" id="chatbotBody">
+    <div class="chatbot-messages" id="chatMessages">
+      <div class="message bot-message">
+        Hello! I'm your CARDIO assistant. How can I help with your heart health today?
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="userInput" placeholder="Ask about heart health...">
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
+</div>
+
+
+  
 <div class="form-section">
                     <fieldset>
                         <legend><h3>Genetic Information</h3></legend>
@@ -104,4 +131,5 @@
   </script>
 
 </body>
+
 </html>
