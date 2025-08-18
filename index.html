@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="#" class="logo">HealthCare+</a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#doctors">Doctors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="search-box">
+      <input type="text" placeholder="Search...">
+      <button>Go</button>
+    </div>
+    <button class="appointment-btn">Book Appointment</button>
+  </nav>
+
+  <div class="content">
+    <div class="doctor-details">
+      <marquee direction="up" scrollamount="3">
+        <P><p>  </p>
+</P>
+      </marquee>
+    </div>
+
+    <div class="scanner">
+        <div class="scanner-box">
+      <img id="preview" src="https://via.placeholder.com/200?text=Scan+Code" alt="Scanner">
+      <div class="scan-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload">
+    <input type="file" id="fileInput" accept="image/*">
+    <label for="fileInput">Upload Image</label>
+  </div>
+<div class="form-section">
+                    <fieldset>
+                        <legend><h3>Genetic Information</h3></legend>
+                        <div class="genetic-form">
+                            <div class="form-group">
+                                <label for="family-history">Family History of Heart Disease</label>
+                                <select id="family-history" aria-describedby="family-history-help">
+                                    <option value="0">None</option>
+                                    <option value="1">One immediate family member</option>
+                                    <option value="2">Multiple family members</option>
+                                </select>
+                                <small id="family-history-help" class="help-text">Select the highest level in your immediate family</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="genetic-score">Genetic Risk Score (if known)</label>
+                                <input type="number" id="genetic-score" min="0" max="100" placeholder="Enter 0-100" aria-describedby="score-help">
+                                <small id="score-help" class="help-text">Enter your polygenic risk score if previously calculated</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="apoe">APOE Gene Status</label>
+                                <select id="apoe" aria-describedby="apoe-help">
+                                    <option value="0">Normal</option>
+                                    <option value="1">One variant allele</option>
+                                    <option value="2">Two variant alleles</option>
+                                </select>
+                                <small id="apoe-help" class="help-text">Typically determined through genetic testing</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="variant-9p21">9p21 Variant</label>
+                                <select id="variant-9p21" aria-describedby="9p21-help">
+                                    <option value="0">Absent</option>
+                                    <option value="1">Present</option>
+                                </select>
+                                <small id="9p21-help" class="help-text">Check your genetic test results for this variant</small>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <button id="predict-btn" class="btn btn-primary">Calculate Risk Prediction</button>
+            </div>
+  <script>
+    const fileInput = document.getElementById('fileInput');
+
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          localStorage.setItem('uploadedImage', e.target.result);
+          window.location.href = "ml-result.html"; // redirect to demo ML page
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
