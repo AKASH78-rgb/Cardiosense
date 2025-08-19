@@ -154,3 +154,100 @@ function addMessage(text, sender) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
   return messageDiv;
 }
+document.addEventListener('DOMContentLoaded', function() {
+    // Form elements
+    const familyHistory = document.getElementById('family-history');
+    const geneticScore = document.getElementById('genetic-score');
+    const apoeStatus = document.getElementById('apoe');
+    const variant9p21 = document.getElementById('variant-9p21');
+    const predictBtn = document.getElementById('predict-btn');
+    
+    // Risk calculation function
+    function calculateRisk() {
+        // Get values from form
+        const familyHistoryValue = parseInt(familyHistory.value);
+        const geneticScoreValue = geneticScore.value ? parseInt(geneticScore.value) : 0;
+        const apoeValue = parseInt(apoeStatus.value);
+        const variant9p21Value = parseInt(variant9p21.value);
+        
+        // Validate inputs
+        if (geneticScoreValue < 0 || geneticScoreValue > 100) {
+            alert('Please enter a valid genetic risk score between 0-100');
+            return;
+        }
+        
+        // Calculate base risk (weights can be adjusted based on your model)
+        let riskScore = 0;
+        
+        // Family history contributes 0-20 points
+        riskScore += familyHistoryValue * 10;
+        
+        // Genetic score contributes 0-50 points (normalized)
+        riskScore += geneticScoreValue * 0.5;
+        
+        // APOE status contributes 0-15 points
+        riskScore += apoeValue * 7.5;
+        
+        // 9p21 variant contributes 0-15 points
+        riskScore += variant9p21Value * 15;
+        
+        // Cap at 100
+        riskScore = Math.min(riskScore, 100);
+        
+        // Display results
+        displayResults(riskScore);
+    }
+    
+    // Display results function
+    function displayResults(score) {
+        // Create or update results display
+        let resultsDiv = document.getElementById('risk-results');
+        if (!resultsDiv) {
+            resultsDiv = document.createElement('div');
+            resultsDiv.id = 'risk-results';
+            resultsDiv.className = 'risk-results';
+            predictBtn.insertAdjacentElement('afterend', resultsDiv);
+        }
+        
+        // Determine risk level
+        let riskLevel, recommendation;
+        if (score < 30) {
+            riskLevel = 'Low Risk';
+            recommendation = 'Maintain regular checkups and healthy lifestyle';
+        } else if (score < 60) {
+            riskLevel = 'Moderate Risk';
+            recommendation = 'Consider more frequent monitoring and discuss prevention with your doctor';
+        } else {
+            riskLevel = 'High Risk';
+            recommendation = 'Immediate consultation with cardiologist recommended';
+        }
+        
+        // Create HTML for results
+        resultsDiv.innerHTML = `
+            <h4>Heart Attack Risk Assessment</h4>
+            <div class="risk-meter">
+                <div class="risk-bar" style="width: ${score}%"></div>
+            </div>
+            <p><strong>Risk Score:</strong> ${score.toFixed(1)}%</p>
+            <p><strong>Risk Level:</strong> ${riskLevel}</p>
+            <p><strong>Recommendation:</strong> ${recommendation}</p>
+        `;
+        
+        // Scroll to results
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Event listener for predict button
+    predictBtn.addEventListener('click', calculateRisk);
+    
+    // Optional: Add real-time validation for genetic score
+    geneticScore.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        if (isNaN(value) || value < 0 || value > 100) {
+            this.classList.add('error');
+        } else {
+            this.classList.remove('error');
+        }
+        
+    });
+});
