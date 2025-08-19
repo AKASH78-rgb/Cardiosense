@@ -72,32 +72,97 @@ body {
 }
 .appointment-btn:hover { background-color: #e64a19; }
 
-.content {
-  display: flex;
-  align-items: flex-start;
-  padding: 0;
-  margin: 0;
-}
+  .content {
+      display: flex;
+      align-items: flex-start;
+      padding: 0;
+      margin: 0;
+    }
 
-.doctor-details {
-  position: fixed;
-  left: 0;
-  top: 60px;
-  width: 250px;
-  height: calc(100vh - 60px);
-  background: white;
-  padding: 15px;
-  border-right: 2px solid #ddd;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-.doctor-details marquee {
-  font-size: 1em;
-  color: #333;
-  line-height: 1.8em;
-  height: 100%;
-}
-
+    .doctor-details {
+      position: fixed;
+      left: 0;
+      top: 60px;
+      width: 250px;
+      height: calc(100vh - 60px);
+      background: white;
+      padding: 15px;
+      border-right: 2px solid #ddd;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .doctor-details marquee {
+      font-size: 1em;
+      color: #333;
+      line-height: 1.8em;
+      height: 100%;
+    }
+    
+    .heart-attack-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+      margin-left: 270px;
+      width: calc(100% - 270px);
+    }
+    
+    .type-box {
+      width: 250px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .type-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .type-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .type-box p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .type-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.1));
+      z-index: 1;
+    }
+    
+    .box-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .highlight {
+      animation: pulse 2s infinite;
+    }
 .scanner {
   margin-left: 270px;
   flex: 1;
